@@ -2,11 +2,11 @@ require('dotenv').config()
 const cors = require('cors')
 const mongoose = require('mongoose')
 const express = require('express')
-const path = require('path')
 const AuthRouter = require('./routes/auth.routes')
 const ProductRouter = require('./routes/product.routes')
 const CartRouter = require('./routes/cart.routes')
 const OrdersRouter = require('./routes/orders.routes')
+const config = require('config')
 
 const app = express()
 
@@ -22,7 +22,7 @@ app.use('/api/orders', OrdersRouter)
 
 const start = async () => {
     try {
-        await mongoose.connect('mongodb+srv://carnage:carnage2001@cluster0.5lbnm.mongodb.net/mern-store?retryWrites=true&w=majority')
+        await mongoose.connect(config.get("MONGO"))
         app.listen(PORT, () => console.log(`Server has been started on ${PORT} port`))
     } catch (e) {
         console.log('Server error', e.message)
