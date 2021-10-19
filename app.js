@@ -22,7 +22,7 @@ app.use('/api/orders', OrdersRouter)
 
 const start = async () => {
     try {
-        await mongoose.connect(process.env.MONGO)
+        await mongoose.connect('mongodb+srv://carnage:carnage2001@cluster0.5lbnm.mongodb.net/mern-store?retryWrites=true&w=majority')
         app.listen(PORT, () => console.log(`Server has been started on ${PORT} port`))
     } catch (e) {
         console.log('Server error', e.message)
