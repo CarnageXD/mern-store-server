@@ -22,6 +22,13 @@ app.use('/api/products', ProductRouter)
 app.use('/api/cart', CartRouter)
 app.use('/api/orders', OrdersRouter)
 
+if (process.env.NODE_ENV === "production"{
+    app.use(express.static("build"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+    });
+}
+
 const start = async () => {
     try {
         await mongoose.connect(config.get("MONGO"))
