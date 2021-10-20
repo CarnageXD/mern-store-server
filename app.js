@@ -7,27 +7,18 @@ const ProductRouter = require('./routes/product.routes')
 const CartRouter = require('./routes/cart.routes')
 const OrdersRouter = require('./routes/orders.routes')
 const config = require('config')
-const path = require('path')
 
 const app = express()
 
 const PORT = process.env.PORT || 5000
 
 app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'files')))
 app.use(cors())
 app.use(express.json())
 app.use('/api/auth', AuthRouter)
 app.use('/api/products', ProductRouter)
 app.use('/api/cart', CartRouter)
 app.use('/api/orders', OrdersRouter)
-
-if (process.env.NODE_ENV === "production"{
-    app.use(express.static("build"));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname,  "build", "index.html"));
-    });
-}
 
 const start = async () => {
     try {
