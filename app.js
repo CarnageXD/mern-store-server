@@ -29,4 +29,8 @@ const start = async () => {
     }
 }
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('/build'))
+}
+
 start()
